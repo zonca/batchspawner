@@ -153,7 +153,8 @@ class BatchSpawnerBase(Spawner):
     def submit_batch_script(self):
         subvars = self.get_req_subvars()
         cmd = self.batch_submit_cmd.format(**subvars)
-        subvars['cmd'] = ' '.join(self.cmd + self.get_args())
+        #subvars['cmd'] = ' '.join(self.cmd + self.get_args())
+        subvars['cmd'] = 'export JPY_API_TOKEN={};'.format(self.api_token) + ' '.join(self.cmd + self.get_args())
         if hasattr(self, 'user_options'):
             subvars['user_options'] = self.user_options
         script = self.batch_script.format(**subvars)
